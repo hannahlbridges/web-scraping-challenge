@@ -9,70 +9,75 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
-<body>
+<body style="background-color:#0B3D91;color:whitesmoke">
     <div class="container">
-  
-      <div class="jumbotron text-center">
-        <h1>Mars Facts</h1>
-        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape Mars Facts</a></p>
-      </div>
 
-      <div class='row'>
-          <h1 class='heading'>{{mars_components.title}}</h1>
-          <p>{{mars_components.news_p}}</p>
-      </div>
+        <div class="jumbotron text-center" style="background-color:#FC3D21">
+            <h1>Mars Facts</h1>
+            <p><a class="btn btn-primary btn-lg" style="background-color:#061f4a" href="/scrape" role="button">Scrape
+                    Mars Facts</a></p>
+        </div>
 
-      <div class='row'>
+        <div class='row' style="padding-left:15px;padding-right:15px;">
+            <h1 class='heading'>{{mars_components.title}}</h1>
+            <p>{{mars_components.news_p}}</p>
+        </div>
 
-          <div class="col-md-8">
-              <h2>Featured Mars Image</h2>
-              <a href={{mars_components.feature_image_url}}>Featured Mars Image</a>
-          </div>
+        <div class='row'>
 
-          <div class="col-md-4">
-              <h1>Mars Facts</h1>
-              <table>
-                  {{mars_components.mars_facts}}
-              </table>
-          </div>
+            <div class="col-md-8">
+                <h1>Featured Mars Image</h1>
+                <a href="{{ mars_components.feature_image_url }}">
+                    <img src="{{ mars_components.feature_image_url }}" alt="Featured Mars Image"
+                        style="max-width:100%;margin:auto;">
+                </a>
+            </div>
 
-      </div>
+            <div class="col-md-4">
+                <h1>Mars Facts</h1>
+                <div class="MarsFacts" style="background-color:#aeb0b5;color:black;">
+                    {{ mars_components.mars_facts |safe }}</div>
 
-    <div class='container'>
-    
-        <h2>Mars Hemispheres</h2>
+            </div>
 
-        <div class="card-deck">
-            <hr>
-            <div class="col-md-12">
-                <div class="row">
-                    {% for item in mars_components.hemisphere_image_urls %}
-                    <div class="col-md-6">
-                        <div class="card text-white bg-dark" style="margin: 30px;">
-                            <img class="card-img-top" src="{{ item.img_url }}" />
-                            <div class="card-body">
-                                <p class="card-text">{{ item.title }}</p>
+        </div>
+
+        <div class='container'>
+
+            <h2>Mars Hemispheres</h2>
+
+            <div class="card-deck">
+                <hr>
+                <div class="col-md-12">
+                    <div class="row">
+                        {% for item in mars_components.hemisphere_image_urls %}
+                        <div class="col-md-6">
+                            <div class="card text-white bg-dark" style="margin: 30px;">
+                                <img class="card-img-top" src="{{ item.image_url }}"
+                                    style="max-width:100%;margin:auto" />
+                                <div class="card-body">
+                                    <h3 class="card-text">{{ item.title }}</h3>
+                                </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
+
+
             </div>
-    
-    
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
 
-   
+
 </body>
 
 </html>

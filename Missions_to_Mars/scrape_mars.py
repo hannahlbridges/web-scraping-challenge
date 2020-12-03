@@ -3,6 +3,7 @@ import requests
 from splinter import Browser
 from splinter.exceptions import ElementDoesNotExist
 import pandas as pd
+import time
 
 def init_browser():
     executable_path = {"executable_path": "chromedriver.exe"}
@@ -17,13 +18,12 @@ def scrape():
     url = 'https://mars.nasa.gov/news'
     browser.visit(url)
 
+    time.sleep(1)
+
     html = browser.html
     news_soup = BeautifulSoup(html, 'html.parser')
 
     step1 = news_soup.find('ul', class_='item_list')
-
-    # Error says NoneType object has no attribute 'find', NoneType = step1
-
     step2 = step1.find('li', class_='slide')
     title = step2.find('div',class_='content_title').text
 
@@ -34,8 +34,6 @@ def scrape():
 
     components['title'] = title
     components['news_p'] = news_p
-
-    browser.quit()
 
     # Scrape featured image url from nasa spaceimages
 
@@ -57,22 +55,21 @@ def scrape():
 
     components['feature_image_url'] = feature_image_url
 
-    browser.quit()
-
     # Scrape mars facts table from space-facts
 
     url = 'https://space-facts.com/mars/'
 
     tables = pd.read_html(url)
-    mars_facts_db = tables[0]
+    mars_facts_df = tables[0]
 
-    mars_facts_db.rename({0: 'Descripter', 1: 'Values'}, axis=1)
+    # mars_facts_df.rename({0: 'Descripter', 1: 'Values'}, axis=1)
+    # the above code worked in jupyter notebook but not in vsc. I could not find a 
+    # reason so I dropped the header altogether below. I do not think it impedes 
+    # readability
 
-    mars_facts = mars_facts_db.to_html(index=False)
+    mars_facts = mars_facts_df.to_html(index=False, header=False)
 
     components['mars_facts'] = mars_facts
-
-    browser.quit()
 
     # Scrape titles and image urls for each mars hemisphere
 
